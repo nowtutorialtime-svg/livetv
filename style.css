@@ -1443,6 +1443,168 @@ a { text-decoration: none; color: inherit; }
 @media (max-width: 768px) {
   :root { --sidebar-w: 280px; }
 
+  /* ── Sidebar slides off-screen on mobile ── */
+  #sidebar {
+    transform: translateX(-100%);
+    box-shadow: var(--shadow-xl);
+    z-index: 200;
+  }
+  #sidebar.open { transform: translateX(0); }
+  .main-content { margin-left: 0; width: 100%; }
+  .hamburger-btn { display: flex; }
+
+  /* ── Hide desktop-only header items ── */
+  .user-name { display: none; }
+  #btn-live, #btn-notif, .user-menu { display: none !important; }
+  #header { padding: 0 12px; gap: 8px; height: 56px; }
+  .search-wrap { max-width: 100%; flex: 1; }
+  #search-input { height: 38px; font-size: 13px; }
+
+  /* ── Page body fills full width ── */
+  .page-body {
+    padding: 16px 12px 90px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* ── Hero banner: compact, full-width ── */
+  #hero-banner {
+    flex-direction: column;
+    min-height: auto;
+    padding: 20px 16px;
+    align-items: flex-start;
+    border-radius: var(--radius-md);
+    margin-bottom: 18px;
+  }
+  .hero-content {
+    padding: 0;
+    text-align: left;
+    width: 100%;
+    z-index: 2;
+  }
+  .hero-title { font-size: 20px; margin-bottom: 6px; line-height: 1.3; }
+  .hero-subtitle { font-size: 13px; }
+  .hero-meta { justify-content: flex-start; font-size: 12px; }
+  .hero-actions { justify-content: flex-start; gap: 8px; flex-wrap: wrap; }
+  .btn-primary, .btn-secondary { font-size: 12px; padding: 8px 14px; }
+  /* Hide the hero visual image panel on mobile to save space */
+  .hero-visual { display: none; }
+
+  /* ── Hide scroll arrows on mobile ── */
+  .scroll-arrow { display: none !important; }
+  .scroll-container-wrap { width: 100%; overflow: visible; }
+
+  /* ── Channel grid: 2-column full-width grid ── */
+  #channel-grid,
+  #channel-grid:not(.view-all-grid) {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    padding: 0 !important;
+    width: 100% !important;
+    scrollbar-width: unset;
+  }
+  #channel-grid:not(.view-all-grid)::-webkit-scrollbar { display: none; }
+
+  /* ── Reset card sizing for grid fill ── */
+  #channel-grid .channel-card,
+  #channel-grid .skeleton-card,
+  #channel-grid:not(.view-all-grid) .channel-card,
+  #channel-grid:not(.view-all-grid) .skeleton-card {
+    flex: unset !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  /* ── View-all still grid, 2 cols ── */
+  #channel-grid.view-all-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  /* ── Channel card internals scale nicely ── */
+  .channel-card { padding: 12px 10px; }
+  .card-logo-wrap { height: 70px; }
+  .card-name { font-size: 12px; }
+  .card-cat { font-size: 10px; }
+
+  /* ── Trending / Continue watching: horizontal scroll (intentional) ── */
+  #trending-scroll,
+  #continue-scroll {
+    gap: 12px;
+    padding-bottom: 8px;
+  }
+  .trending-card { width: 160px; }
+  .trending-thumb { height: 90px; }
+  .continue-card { width: 150px; }
+  .continue-thumb { height: 85px; }
+
+  /* ── Pill category bar ── */
+  .pills-wrap { gap: 6px; }
+  .pill { font-size: 12px; padding: 6px 12px; }
+
+  /* ── Section headers ── */
+  .section-title { font-size: 15px; }
+  .view-all-btn { font-size: 12px; padding: 4px 10px; }
+
+  /* ── Hide sections in view-all mode ── */
+  body.view-all-active #hero-section,
+  body.view-all-active #pills-nav,
+  body.view-all-active #trend-sec,
+  body.view-all-active #continue-section {
+    display: none !important;
+  }
+  body.view-all-active .page-body { padding-top: 10px; }
+
+  /* ── Mobile bottom nav ── */
+  .mobile-bottom-nav { display: block; }
+
+  /* ── Player modal: full-screen on mobile ── */
+  #player-modal { padding: 0; align-items: flex-end; }
+  .player-inner {
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    max-width: 100vw;
+    width: 100%;
+  }
+  .player-top { padding: 10px 14px; }
+  .player-controls-bar { padding: 10px 10px; gap: 4px; }
+  #pcb-volume { width: 45px !important; }
+  .pcb-badge-live { font-size: 9px; padding: 2px 6px; }
+}
+
+@media (max-width: 480px) {
+  #channel-grid,
+  #channel-grid:not(.view-all-grid),
+  #channel-grid.view-all-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+  .channel-card { padding: 10px 8px; }
+  .card-logo-wrap { height: 60px; }
+  .card-name { font-size: 11px; }
+  #header { gap: 6px; }
+  .page-body { padding: 12px 10px 85px; }
+  .hero-title { font-size: 18px; }
+}
+
+/* ── Scrollbar ──────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-2); }
+
+/* ── Utility ────────────────────────────────────── */
+.flex-center { display: flex; align-items: center; justify-content: center; }
+.gap-2 { gap: 8px; }
+.mt-1 { margin-top: 4px; }
+.hidden { display: none !important; }
+
+  :root { --sidebar-w: 280px; }
+
   body.view-all-active #hero-section,
   body.view-all-active #pills-nav,
   body.view-all-active #trend-sec,
@@ -1450,7 +1612,7 @@ a { text-decoration: none; color: inherit; }
   body.view-all-active .scroll-arrow {
     display: none !important;
   }
-  
+
   body.view-all-active .page-body {
     padding-top: 10px;
   }
@@ -1482,19 +1644,11 @@ a { text-decoration: none; color: inherit; }
     width: 100%;
   }
 
-  .hero-title {
-    font-size: 24px;
-    margin-bottom: 6px;
-  }
+  .hero-title { font-size: 24px; margin-bottom: 6px; }
 
-  .hero-meta {
-    justify-content: center;
-  }
+  .hero-meta { justify-content: center; }
 
-  .hero-actions {
-    justify-content: center;
-    gap: 8px;
-  }
+  .hero-actions { justify-content: center; gap: 8px; }
 
   .hero-visual {
     width: 100%;
@@ -1505,16 +1659,9 @@ a { text-decoration: none; color: inherit; }
     margin-top: 14px;
   }
 
-  .hero-logo-box {
-    width: 120px;
-    height: 120px;
-  }
+  .hero-logo-box { width: 120px; height: 120px; }
 
-  .hero-logo-fallback {
-    width: 60px;
-    height: 60px;
-    font-size: 20px;
-  }
+  .hero-logo-fallback { width: 60px; height: 60px; font-size: 20px; }
 
   .hero-visual img {
     border-radius: var(--radius-md) !important;
@@ -1542,18 +1689,19 @@ a { text-decoration: none; color: inherit; }
     cursor: pointer;
     transition: all var(--transition);
   }
-  
+
   .scroll-arrow:hover {
     background: var(--primary-xlight);
     color: var(--primary);
   }
-  
-  .scroll-arrow-left {
-    left: -8px;
-  }
-  
-  .scroll-arrow-right {
-    right: -8px;
+
+  .scroll-arrow-left { left: -8px; }
+  .scroll-arrow-right { right: -8px; }
+
+  /* ---- New mobile fixes ---- */
+  .scroll-container-wrap {
+    width: 100%;
+    overflow: hidden;
   }
 
   #channel-grid:not(.view-all-grid) {
@@ -1561,23 +1709,31 @@ a { text-decoration: none; color: inherit; }
     overflow-x: auto !important;
     scroll-behavior: smooth;
     gap: 12px;
-    padding-bottom: 8px;
+    padding: 4px 8px 12px 4px;
     scrollbar-width: none;
+    width: 100%;
   }
-  
-  #channel-grid:not(.view-all-grid)::-webkit-scrollbar {
-    display: none;
+  #channel-grid:not(.view-all-grid)::-webkit-scrollbar { display: none; }
+
+  #channel-grid:not(.view-all-grid) .channel-card,
+  #channel-grid:not(.view-all-grid) .skeleton-card {
+    flex: 0 0 150px !important;
+    max-width: 150px !important;
+    width: 150px !important;
   }
-  
-  #channel-grid:not(.view-all-grid) .channel-card {
-    flex-shrink: 0;
-    width: 160px;
+
+  .player-controls-bar {
+    padding: 12px 10px;
+    gap: 4px;
   }
-  
-  #channel-grid.view-all-grid {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) !important;
-    gap: 12px;
+
+  #pcb-volume {
+    width: 45px !important;
+  }
+
+  .pcb-badge-live {
+    font-size: 9px;
+    padding: 2px 6px;
   }
 
   .page-body { padding: 20px 16px 100px; }
@@ -1590,25 +1746,13 @@ a { text-decoration: none; color: inherit; }
   #header { padding: 0 16px; gap: 10px; }
 
   .hero-actions { gap: 8px; }
+
   .btn-primary, .btn-secondary { font-size: 13px; padding: 9px 16px; }
 
-  #player-modal {
-    padding: 0;
-  }
-  .player-inner {
-    border-radius: 0;
-    max-width: 100vw;
-  }
-  .player-top {
-    padding: 10px 14px;
-  }
-  .player-controls-bar {
-    padding: 12px 8px 8px;
-  }
-  .pcb-volume {
-    width: 50px !important;
-  }
+  #player-modal { padding: 0; }
 }
+
+
 
 @media (max-width: 480px) {
   #channel-grid.view-all-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px; }
