@@ -1025,7 +1025,16 @@ function updateMuteIcon(){
 
 // ── SKELETONS / ERRORS ────────────────────────────────────
 function showSkels(){
-  $('channel-grid').innerHTML=Array(12).fill(0).map(()=>`<div class="skeleton-card"><div class="sk-logo"></div><div class="sk-line" style="width:75%;margin:0 auto 7px"></div><div class="sk-line" style="width:55%;margin:0 auto"></div></div>`).join('');
+  const isMobile = window.innerWidth <= 768 && !S.viewAll;
+  const skeletonCount = isMobile ? 6 : 12;
+  
+  $('channel-grid').innerHTML=Array(skeletonCount).fill(0).map(() => `
+    <div class="skeleton-card">
+      <div class="sk-logo"></div>
+      <div class="sk-line" style="width:75%; margin:0 auto 7px"></div>
+      <div class="sk-line" style="width:55%; margin:0 auto"></div>
+    </div>
+  `).join('');
 }
 function showHeroSkel(){ $('hero-banner').innerHTML=`<div class="hero-skel skeleton-anim" style="width:100%;height:280px;border-radius:24px"></div>`; }
 function showErr(msg){ $('channel-grid').innerHTML=`<div class="empty-state"><div class="empty-icon">⚠️</div><h3>Failed to load channels</h3><p>${esc(msg)}</p><button class="btn-primary" onclick="loadRegion('${S.region}')">↻ Retry</button></div>`; }
